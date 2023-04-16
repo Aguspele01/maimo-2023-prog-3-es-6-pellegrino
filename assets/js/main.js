@@ -15,18 +15,22 @@ console.log('Ex 3', songAntes)
 
 // Example 4
 
-const mimusica = songs [0].title
-console.log('Ex 4', mimusica)
+/*const mimusica = songs [0].title
+console.log('Ex 4', mimusica)*/
+
+const {title: mimusica} = songs[0];
+console.log ('Ex 4',mimusica) 
+
 
 // Example 5
 
 const eagle = songs.find(HotelCalifornia => HotelCalifornia.artist === 'Eagles')
 console.log('Ex 5', eagle)
 
-// Example 6 (No resuelto aún)
+// Example 6
 
-
-
+const sum = (...values) => values.reduce ((acc, curr) => acc + curr, 0)
+console.log ('Ex 6', sum (1,2,10,20))
 
 // Example 7
 
@@ -35,22 +39,28 @@ console.log('Ex 7', infoCompleto)
 
 // Example 8
 
-const beatles = songs.filter(({artist}) => artist === 'The Beatles')
+/*const beatles = songs.filter(({artist}) => artist === 'The Beatles')
+console.log('Ex 8', beatles)*/
+
+const beatles = songs.filter(({artist}) => artist === 'The Beatles').map (({title}) => title) 
 console.log('Ex 8', beatles)
 
 
-// Example 9 (No resuelto aún)
+// Example 9
+
+const totalYears = songs.reduce ((acc, curr) => acc + curr.year, 0)
+//const averageYears = totalYears / songs.length
+
+console.log('Ex 9', totalYears)
+
+// Example 10
 
 
+// Example 11
 
-// Example 10 (No resuelto aún)
-
-
-
-// Example 11 (No resuelto aún)
-
-
-
+const longestSong = songs.find(({title}) => title.length === Math.max(...songs.map(({title})=> title.length))
+);
+console.log('Ex 11', longestSong)
 
 // Example 12 
 
@@ -60,16 +70,15 @@ const {title, artist,year} = firstSong
 console.log('Ex 12', `${title} de ${artist} (${year})`)
 
 
-// Example 13 (No resuelto aún)
+// Example 13
 
 
+// Example 14
 
-// Example 14 (No resuelto aún)
+// Example 15
 
-
-
-// Example 15 (No resuelto aún)
-
+const songsLongTitltes = songs.every(song => song.length >= 5);
+console.log('Ex 15',songsLongTitltes);
 
 
 // Example 16
@@ -80,34 +89,50 @@ console.log('Ex 16', canciones80s)
 
 // Example 17
 
-const Beatlessong = (title, artist, year) => {
+/*const Beatlessong = (title, artist, year) => {
 return `${artist} released ${title} in ${year}`;
 }
 
 Beatlessong('Let it Be','The Beatles',1970)
 
 const infoBeat = Beatlessong('Let it Be','The Beatles',1970);
-console.log('Ex 17',infoBeat)
+console.log('Ex 17',infoBeat)*/
+
+const letitbe = songs.find((song) => song.title === 'Let It Be')
+const infoBeat = `${letitbe.artist} released ${letitbe.title} in ${letitbe.year}`
+console.log('Ex 17', infoBeat)
 
 // Example 18
 const songArtist = songs.map (song => `${song.artist}`)
 console.log('Ex 18.', songArtist)
 
 
-// Example 19 (No resuelto aún)
+// Example 19
 
+function randomSong() {
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    return songs[randomIndex];
+  }
+
+  console.log('Ex 19',randomSong());
+  console.log(randomSong());
+  console.log(randomSong());
 
 
 // Example 20
 
+//Quiero que me aparezcan todos los años
 const songYear = songs.map ((song) => `${song.year}`)
 console.log('Ex 20 (a)', songYear)
 
 //Quiero que me aparezcan los artistas de 1975 en adelante
-//const songDespues = songs.filter(({year}) => year === '1975' || parseInt(year) >= 1975)
-//console.log('Ex 20 (b)', songDespues)
+const songDespues = songs.filter(({year}) => year === '1975' || parseInt(year) >= 1975).map(({artist}) => artist)
+console.log('Ex 20 (b)', songDespues)
 
-
+//Descripción de la canción Stairway to Heaven
+const toheaven = songs.find((song) => song.title === 'Stairway to Heaven')
+const infoheaven = `In ${toheaven.year}, the singer called ${toheaven.artist} released the song called ${toheaven.title}`
+console.log('Ex 20 (c)', infoheaven)
 
 
 /*
@@ -154,7 +179,7 @@ Tips:
 
 18. Use the map() method to create a new array with just the artist names.  -----------------------------------------------------------
 
-19. Create a function called randomMovie that returns one movie from the songs array randomly. Log the call of this function 3 times.
+19. Create a function called randomSong that returns one song from the songs array randomly. Log the call of this function 3 times.
 
 20. Write your own function using at least 3 concepts.
 
